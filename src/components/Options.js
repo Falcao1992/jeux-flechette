@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 import styled from "styled-components"
 
 
@@ -7,6 +8,8 @@ const Options = ({players, setPlayers}) => {
     const [currentPlayerAvatar, setCurrentPlayerAvatar] = useState('')
     const [score, setScore] = useState('')
     
+    let history = useHistory();
+    
     const addPlayer = (e) => {
         e.preventDefault()
         if (currentPlayerName !== '' && score !== '' && currentPlayerAvatar !== '') {
@@ -14,7 +17,8 @@ const Options = ({players, setPlayers}) => {
                 name: currentPlayerName,
                 avatar: currentPlayerAvatar,
                 score: score,
-                shots: [],
+                shots: ['','',''],
+                order: players.length,
                 nbLaunch: 0,
                 playerScore: score
             }
@@ -36,6 +40,10 @@ const Options = ({players, setPlayers}) => {
         } catch (error) {
             console.error(error)
         }
+    }
+    
+    const handleSubmit = () => {
+        history.push('/game')
     }
     
     return (
@@ -89,7 +97,7 @@ const Options = ({players, setPlayers}) => {
                 )
             })}
             <div>
-            
+                <button onClick={handleSubmit} disabled={!score || players.length <= 0}>Lancer Partie !!!</button>
             </div>
         </div>
     )
