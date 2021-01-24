@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import styled from "styled-components"
+import PlayerContext from "../context/PlayerContext"
 
-const PlayerCard = ({player, players, setPlayers, currentPlayer, setCurrentPlayer, turnToPlay, rank, setRank}) => {
+const PlayerCard = ({player, currentPlayer, setCurrentPlayer, turnToPlay, rank, setRank}) => {
     const [shots, setShots] = useState([null, null, null])
+    const {players, updatePlayers} = useContext(PlayerContext)
     
     const handleShots = (e) => {
         let shotCopy = [...shots]
@@ -19,18 +21,18 @@ const PlayerCard = ({player, players, setPlayers, currentPlayer, setCurrentPlaye
             
             if (player.playerScore - totalShotPoint < 0) {
                 console.log("plus petit que 0")
-                setPlayers(copyPlayers)
+                updatePlayers(copyPlayers)
                 resolve('plus petit que 0')
             } else if (player.playerScore - totalShotPoint === 0) {
                 console.log("partie gagner")
                 copyPlayers[currentPlayer].playerScore -= totalShotPoint
-                setPlayers(copyPlayers)
+                updatePlayers(copyPlayers)
                 setRank([...rank, player])
                 resolve('partie gagner')
             } else {
                 console.log("continue a jouer")
                 copyPlayers[currentPlayer].playerScore -= totalShotPoint
-                setPlayers(copyPlayers)
+                updatePlayers(copyPlayers)
                 resolve('continue a jouer')
             }
         })

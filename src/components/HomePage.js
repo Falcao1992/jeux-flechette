@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useLayoutEffect} from "react"
 import styled, {keyframes} from "styled-components"
 import {Link} from "react-router-dom"
 import dartsHomePageBg from "../assets/dartsHomePageBg.jpg"
@@ -6,14 +6,22 @@ import dartsHomePageBg from "../assets/dartsHomePageBg.jpg"
 
 const HomePage = () => {
     
+    useLayoutEffect(() => {
+        generateBlock()
+    },[])
+    
     const generateBlock = () => {
-        return [...Array(100)].map((x, i) =>
-            <Blocks key={i} bg={dartsHomePageBg} delay={i * 0.05} />)
+        return [...Array(400)].map((x, i) =>
+            <Blocks key={i} bg={dartsHomePageBg} delay={i * 0.02} />)
     }
     
     return (
         <ContainerPage>
+            <BlockTitle>
+                <h1>jeux flechette</h1>
+            </BlockTitle>
             <BlockButton>
+                <Circle/>
                 <ButtonPlay to="/options">Jouer</ButtonPlay>
             </BlockButton>
             <BlockBanner>
@@ -22,7 +30,7 @@ const HomePage = () => {
         </ContainerPage>
     )
 }
-const animate = (bg) => keyframes`
+const animateBlocks = (bg) => keyframes`
   0% {
     opacity: 0;
     transform: scale(0) translateY(1000px);
@@ -48,27 +56,78 @@ const animateButton = keyframes`
     0% {opacity: 0}100% {opacity: 1}
 `
 
+const boxMagic = keyframes`
+    from {
+        box-shadow:
+        0 0 0 #feac5e,
+        0 0 0 #c779d0,
+        0 0 0 #4bc0c8,
+        0 0 0 #42db75;
+    }
+    to {
+        box-shadow:
+        0 -5px 0 #feac5e,
+        -5px 0 0 #c779d0,
+        0 5px 0 #4bc0c8,
+        5px 0 0 #42db75;
+    }
+`
+
+const spinning = keyframes`
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+`
+
 const ContainerPage = styled.div`
     position: relative;
     width: 100%;
     height: 100vh;
+    background-color: #14161a;
+`
+
+const BlockTitle = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2.4rem;
+    color: white;
 `
 
 const BlockButton = styled.div`
     position: absolute;
-    top: 50%;
+    top: 85%;
     left: 50%;
+    transform: translate(-50%,-50%);
     opacity: 0;
-    transform: translate(-50%, -50%);
-    animation: 2s linear 6s forwards ${animateButton};
-    transition: opacity 1s ease-in;
+    animation: 2s linear 7s forwards ${animateButton};
+    transition: opacity 1s ease-in, transform 0.4s cubic-bezier(0.23,1.83,0.42,1.19);
     z-index: 1;
+    
+    &:hover {
+        transform: translate(-50%,-50%) scale(1.2) ;
+    }
+`
+
+const Circle = styled.div`
+    width: 8rem;
+    height: 8rem;
+    padding-top: 8.4rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: 1s linear infinite alternate ${boxMagic},
+               4s linear infinite ${spinning};
 `
 
 const ButtonPlay = styled(Link)`
-    font-weight: 700;
-    color: red;
-    font-size: 10vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: aliceblue;
+    cursor: pointer;
 `
 
 const BlockBanner = styled.div`
@@ -87,14 +146,14 @@ const Blocks = styled.div.attrs(props => ({
         animationDelay: props.delay + 's'
     },
 }))`
-    animation: ${props => animate(props.bg)};
+    animation: ${props => animateBlocks(props.bg)};
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     position: relative;
     display: block;
-    width: 10vw;
-    height: 10vh;
+    width: 5vw;
+    height: 5vh;
     
     &:nth-child(even){
         animation-duration: 1s;

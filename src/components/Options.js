@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { useHistory } from "react-router-dom";
 import styled from "styled-components"
+import PlayerContext from "./context/PlayerContext"
 
-
-const Options = ({players, setPlayers}) => {
+const Options = () => {
     const [currentPlayerName, setCurrentPlayerName] = useState('')
     const [currentPlayerAvatar, setCurrentPlayerAvatar] = useState('')
     const [score, setScore] = useState('')
+    
+    const {players, updatePlayers} = useContext(PlayerContext)
     
     let history = useHistory();
     
@@ -22,7 +24,11 @@ const Options = ({players, setPlayers}) => {
                 nbLaunch: 0,
                 playerScore: score
             }
-            setPlayers([...players, newPlayer])
+            let copyPlayer = players
+            
+            copyPlayer.push(newPlayer)
+            updatePlayers(copyPlayer)
+            
             setCurrentPlayerName('')
             setCurrentPlayerAvatar('')
         }
