@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components"
 
-const PlayerCard = ({player, players, setPlayers}) => {
+const PlayerCard = ({player, players, setPlayers, currentPlayer, setCurrentPlayer, turnToPlay, rank, setRank}) => {
     const [shots, setShots] = useState([null, null, null])
-    
-    useEffect(() => {
-    
-    }, [players])
     
     const handleShots = (e) => {
         let shotCopy = [...shots]
@@ -14,44 +10,76 @@ const PlayerCard = ({player, players, setPlayers}) => {
         setShots(shotCopy)
     }
     
-    const validScore = () => {
-        let copyPlayers = [...players]
-        
-        // calcul sum shots
-        const reducer = (accumulator, currentValue) => accumulator + currentValue
-        let totalShotPoint = shots.reduce(reducer)
-        
-        copyPlayers[player.order].playerScore -= totalShotPoint
-        copyPlayers[player.order].nbLaunch += 1
-        setPlayers(copyPlayers)
-        setShots([null, null, null])
+    const promisePoint = () => {
+        return new Promise((resolve, reject) => {
+            let copyPlayers = [...players]
+            copyPlayers[currentPlayer].nbLaunch += 1
+            const reducer = (accumulator, currentValue) => accumulator + currentValue
+            let totalShotPoint = shots.reduce(reducer)
+            
+            if (player.playerScore - totalShotPoint < 0) {
+                console.log("plus petit que 0")
+                setPlayers(copyPlayers)
+                resolve('plus petit que 0')
+            } else if (player.playerScore - totalShotPoint === 0) {
+                console.log("partie gagner")
+                copyPlayers[currentPlayer].playerScore -= totalShotPoint
+                setPlayers(copyPlayers)
+                setRank([...rank, player])
+                resolve('partie gagner')
+            } else {
+                console.log("continue a jouer")
+                copyPlayers[currentPlayer].playerScore -= totalShotPoint
+                setPlayers(copyPlayers)
+                resolve('continue a jouer')
+            }
+        })
     }
     
-    return (
-        <CardPlayer>
-            <BlockAvatarName>
-                <p>{player.name}</p>
-                <img src={player.avatar} alt={player.name} />
-                <p>{player.playerScore}/{player.score}</p>
-            </BlockAvatarName>
-            <BlockShots>
-                {shots.map((shot, i) => {
-                    return (
-                        <input key={i}
-                               id={i}
-                               type="number"
-                               value={shots[i] || ""}
-                               onChange={handleShots}
-                               autoComplete="off"
-                        />
-                    )
-                })}
-            </BlockShots>
-            <div>
-                <button type='button' onClick={validScore}>Fin du tour</button>
-            </div>
-        </CardPlayer>
-    )
+    const validScore = async () => {
+        console.log("VALID SCORE")
+        setShots([null, null, null])
+        const result = await promisePoint()
+        if (currentPlayer === players.length - 1) {
+            console.log('if player')
+            setCurrentPlayer(0)
+        } else if (result === 'partie gagner') {
+            console.log("include player")
+        } else {
+            console.log('else player')
+            setCurrentPlayer(currentPlayer + 1)
+        }
+    }
+
+return (
+    <CardPlayer active={turnToPlay}>
+        <BlockAvatarName>
+            <p>{player.name}</p>
+            <img src={player.avatar} alt={player.name} />
+            <p>{player.playerScore}/{player.score}</p>
+        </BlockAvatarName>
+        <BlockShots>
+            {shots.map((shot, i) => {
+                return (
+                    <input key={i}
+                           id={i}
+                           type="number"
+                           value={shots[i] || ""}
+                           onChange={handleShots}
+                           autoComplete="off"
+                           disabled={!turnToPlay}
+                    />
+                )
+            })}
+        </BlockShots>
+        <div>
+            <button type='button'
+                    onClick={validScore}
+                    disabled={!turnToPlay}>Fin du tour
+            </button>
+        </div>
+    </CardPlayer>
+)
 }
 const CardPlayer = styled.div`
     width: 90%;
@@ -59,7 +87,7 @@ const CardPlayer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: lightblue;
+    background-color: ${props => props.active ? "green" : "lightblue"};
 `
 
 const BlockAvatarName = styled.div`
