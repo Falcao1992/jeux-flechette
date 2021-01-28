@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import styled from "styled-components"
-import {PlayerContext} from "../context/PlayerContext"
+import {PlayerContext} from "../../PlayerContext"
 
 const PlayerCard = ({player, currentPlayer, setCurrentPlayer, turnToPlay, rank, setRank}) => {
     const [shots, setShots] = useState([null, null, null])
