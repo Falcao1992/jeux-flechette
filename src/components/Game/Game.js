@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import PlayerCard from "../PlayerCard/PlayerCard"
-import PlayerContext from "../context/PlayerContext"
+import {PlayerContext} from "../context/PlayerContext"
 
 const Game = () => {
     const [currentPlayer, setCurrentPlayer] = useState(0)

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {useHistory} from "react-router-dom"
 import styled, {keyframes} from "styled-components"
-import PlayerContext from "./context/PlayerContext"
+import {PlayerContext} from "./context/PlayerContext"
 import {Icon} from '@iconify/react'
 import fileImageOutlined from '@iconify/icons-ant-design/file-image-outlined'
 
