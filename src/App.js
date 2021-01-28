@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import HomePage from "./components/HomePage"
 import Options from "./components/Options"
 import Game from "./components/Game/Game"
-import {PlayerContext} from "./PlayerContext"
+import {PlayerContext} from "./PlayerContext.js"
 
 function App() {
     const [players, setPlayers] = useState([])
