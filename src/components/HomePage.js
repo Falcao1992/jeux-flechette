@@ -39,7 +39,7 @@ const animateBlocks = (bg) => keyframes`
     opacity: 1;
     background-image: url(${bg});
     background-attachment: fixed;
-    background-size: cover;
+    /*background-size: cover;*/
     background-position: center center;
   }
   100% {
@@ -47,7 +47,7 @@ const animateBlocks = (bg) => keyframes`
     transform: scale(1) translateY(0px);
     background-image: url(${bg});
     background-attachment: fixed;
-    background-size: cover;
+    /*background-size: cover;*/
     background-position: center center;
   }
 `
@@ -83,6 +83,7 @@ const ContainerPage = styled.div`
     width: 100%;
     height: 100vh;
     background-color: #14161a;
+    overflow: hidden;
 `
 
 const BlockTitle = styled.div`
