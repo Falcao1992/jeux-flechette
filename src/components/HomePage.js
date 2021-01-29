@@ -97,9 +97,9 @@ const BlockTitle = styled.div`
 
 const BlockButton = styled.div`
     position: absolute;
-    top: 85%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    bottom: 5vh;
+    transform: translateX(-50%);
     opacity: 0;
     animation: 2s linear 7s forwards ${animateButton};
     transition: opacity 1s ease-in, transform 0.4s cubic-bezier(0.23,1.83,0.42,1.19);

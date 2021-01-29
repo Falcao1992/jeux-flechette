@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {useHistory} from "react-router-dom"
-import styled, {keyframes} from "styled-components"
+import styled, {keyframes, css} from "styled-components"
 import {PlayerContext} from "../PlayerContext"
 import {Icon} from '@iconify/react'
 import fileImageOutlined from '@iconify/icons-ant-design/file-image-outlined'
@@ -80,7 +80,7 @@ const Options = () => {
                                 />
                             </FormInputBlock>
                             
-                            <FormInputBlock splitchild>
+                            <FormInputBlock splitchild animicon={score && currentPlayerName && currentPlayerAvatar === ''}>
                                 <input value={currentPlayerName}
                                        onChange={(e) => setCurrentPlayerName(e.target.value)}
                                        type="text"
@@ -103,15 +103,14 @@ const Options = () => {
                                 {currentPlayerAvatar !== "" && <img src={currentPlayerAvatar} alt="" />}
                             </BlockPreviewAvatar>
                             <FormInputBlock>
-                                <input type="submit" disabled={!score} value="Ajouter Joueur" />
+                                <input type="submit" disabled={!score || !currentPlayerAvatar} value="Ajouter Joueur" />
                             </FormInputBlock>
                         </FormStylized>
                         <ContainerAvatars>
                             {players.map((player, index) => {return <img key={index} src={player.avatar} alt={player.name} />})}
                         </ContainerAvatars>
                         <FormInputBlock>
-                            <button onClick={handleSubmit} disabled={!score || players.length <= 0}>Lancer Partie !!!
-                            </button>
+                            <button onClick={handleSubmit} disabled={!score || players.length <= 0}>Lancer Partie !!!</button>
                         </FormInputBlock>
                     </ContainerForm>
                 </Container>
@@ -144,10 +143,19 @@ const BlockPreviewAvatar = styled.div`
 
 const animateSquares = keyframes`
     0%,100% {
-        transform: translateY(-40px);
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(40px);
+        transform: translateY(70px);
+    }
+`
+
+const pulse = keyframes`
+    from {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.15)
+    }
+    to {
+        box-shadow: 0 0 0 15px rgba(0,0,0,0.01);
     }
 `
 
@@ -206,8 +214,8 @@ const Square = styled.div`
     border-bottom: 1px solid rgba(255,255,255,0.2);
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
-    animation: ${animateSquares} 5s linear infinite;
-    animation-delay: calc(-1s * ${props => props.animdelay});
+    animation: ${animateSquares} 7s linear infinite;
+    animation-delay: calc(0.5s * ${props => props.animdelay});
    
     &:nth-child(1) {
         top: -50px;
@@ -230,7 +238,7 @@ const Square = styled.div`
         z-index: 2;
     }
     &:nth-child(4) {
-        bottom: -65px;
+        bottom: -30px;
         left: 100px;
         width: 50px;
         height: 50px;
@@ -288,6 +296,9 @@ const FormStylized = styled.form`
     display: flex;
     flex-direction: column;
 `
+const animationPulse = css`
+    animation: ${pulse} ${props => props.animicon ? 1.5 : 0}s 1.5s infinite backwards
+    `
 
 const FormInputBlock = styled.div`
     width: 100%;
@@ -304,7 +315,11 @@ const FormInputBlock = styled.div`
         border: 1px solid rgba(255,255,255,0.5);
         border-right: 1px solid rgba(255,255,255,0.2);
         border-bottom: 1px solid rgba(255,255,255,0.2);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        ${props => (props.animicon && animationPulse)};
+    }
+    
+    input[disabled] {
+        opacity: .2;
     }
     input[type="file"] {
         display: none;
@@ -327,7 +342,7 @@ const FormInputBlock = styled.div`
         font-size: 1rem;
         letter-spacing: 1px;
         color: white;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: 6px 6px 15px rgb(0 0 0 / 10%);
         
         &::placeholder {
             color: white;
@@ -338,7 +353,7 @@ const FormInputBlock = styled.div`
         transition: background-color .5s ease-in-out;
     }
     button:hover {
-        background-color: rgb(241 18 18 / 50%);;
+        background-color: rgb(190 97 174);
     }
 `
 
