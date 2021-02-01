@@ -118,6 +118,16 @@ const Options = () => {
         </ContainerPage>
     )
 }
+
+const ContainerPage = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #2b218e, #dff1ff);
+    overflow: hidden;
+`
+
 const ContainerAvatars = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -152,21 +162,15 @@ const animateSquares = keyframes`
 
 const pulse = keyframes`
     from {
-        box-shadow: 0 0 0 0 rgba(0,0,0,0.15)
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.15);
+        transform: scale(1);
     }
     to {
         box-shadow: 0 0 0 15px rgba(0,0,0,0.01);
+        transform: scale(1.1);
     }
 `
 
-const ContainerPage = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to bottom, #2b218e, #dff1ff);
-    overflow: hidden;
-`
 
 const ColorBlock = styled.div`
     position: absolute;
