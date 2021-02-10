@@ -147,7 +147,9 @@ const BlockPreviewAvatar = styled.div`
     margin-top: 1.4rem;
     img {
       width: 50%;
+      max-height: 15vh;
       margin: auto;
+      object-fit: cover;
     }
 `
 
@@ -229,7 +231,7 @@ const Square = styled.div`
     }
     &:nth-child(2) {
         top: 150px;
-        left: -80px;
+        left: -100px;
         width: 120px;
         height: 120px;
         z-index: 2;
@@ -258,7 +260,7 @@ const Square = styled.div`
 const Container = styled.div`
     position: relative;
     margin: auto;
-    min-height: 70vh;
+    min-height: 60vh;
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
     display: flex;
@@ -301,7 +303,7 @@ const FormStylized = styled.form`
     flex-direction: column;
 `
 const animationPulse = css`
-    animation: ${pulse} ${props => props.animicon ? 1.5 : 0}s 1.5s infinite backwards
+    animation: ${pulse} ${props => props.animicon ? 1.5 : 0}s .2s infinite backwards
     `
 
 const FormInputBlock = styled.div`
@@ -355,6 +357,9 @@ const FormInputBlock = styled.div`
     button {
         cursor: pointer;
         transition: background-color .5s ease-in-out;
+    }
+    button[disabled]:hover {
+        background-color: transparent;
     }
     button:hover {
         background-color: rgb(190 97 174);

@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import PlayerCard from "../PlayerCard/PlayerCard"
 import {PlayerContext} from "../../PlayerContext"
 import styled, {keyframes} from "styled-components"
+import EndGame from "../EndGame/EndGame"
 
 const Game = () => {
     const [currentPlayer, setCurrentPlayer] = useState(0)
@@ -33,8 +34,8 @@ const Game = () => {
                 <Square animdelay={5} />
                 <Container>
                     {<h2>{players[currentPlayer] && 'Au tour de ' + players[currentPlayer].name}</h2>}
-                    <ContainerPlayerCard>
-                        {players && players.map((player, index) => {
+                    <ContainerPlayerCard display={players.length > 0 && "true"}>
+                        {players &&  players.map((player, index) => {
                             return (
                                 <PlayerCard key={index}
                                             player={player}
@@ -47,15 +48,7 @@ const Game = () => {
                             )
                         })}
                     </ContainerPlayerCard>
-                    <div>
-                        {rank && rank.map((playerRanked, index) => {
-                            return (
-                                <div key={index}>
-                                    <p>{index + 1}{playerRanked.name}</p>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <EndGame rank={rank} />
                 </Container>
             </Box>
         </ContainerPage>
@@ -137,7 +130,7 @@ const Square = styled.div`
     }
     &:nth-child(2) {
         top: 150px;
-        left: -80px;
+        left: -100px;
         width: 120px;
         height: 120px;
         z-index: 2;
@@ -166,6 +159,7 @@ const Square = styled.div`
 const Container = styled.div`
     position: relative;
     margin: auto;
+    padding: .7rem;
     min-height: 70vh;
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
@@ -183,7 +177,8 @@ const Container = styled.div`
         font-size: 1.4rem;
         font-weight: 600;
         letter-spacing: 1px;
-        margin: 1.4rem;
+        margin-bottom: .7rem;
+        padding: .7rem 0;
         
         &:before {
             content: "";
@@ -198,6 +193,7 @@ const Container = styled.div`
 `
 
 const ContainerPlayerCard = styled.div`
+    display: ${props => props.display ? "block" : "none"};
     margin: 1.4rem .7rem;
 `
 

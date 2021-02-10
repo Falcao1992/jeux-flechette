@@ -106,7 +106,7 @@ const BlockButton = styled.div`
     z-index: 1;
     
     &:hover {
-        transform: translate(-50%,-50%) scale(1.2) ;
+        transform: translateX(-50%) scale(1.1) ;
     }
 `
 
