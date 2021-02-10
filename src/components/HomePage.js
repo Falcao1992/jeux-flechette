@@ -71,27 +71,6 @@ const animateButton = keyframes`
     0% {opacity: 0}100% {opacity: 1}
 `
 
-const boxMagic = keyframes`
-    from {
-        box-shadow:
-        0 0 0 #feac5e,
-        0 0 0 #c779d0,
-        0 0 0 #4bc0c8,
-        0 0 0 #42db75;
-    }
-    to {
-        box-shadow:
-        0 -5px 0 #feac5e,
-        -5px 0 0 #c779d0,
-        0 5px 0 #4bc0c8,
-        5px 0 0 #42db75;
-    }
-`
-
-const spinning = keyframes`
-    from {transform: rotate(0deg)}
-    to {transform: rotate(360deg)}
-`
 
 const ContainerPage = styled.div`
     position: relative;
