@@ -117,15 +117,7 @@ const BlockButton = styled.div`
     }
 `
 
-const Circle = styled.div`
-    width: 8rem;
-    height: 8rem;
-    padding-top: 8.4rem;
-    border-radius: 50%;
-    border: 2px solid white;
-    animation: 1s linear infinite alternate ${boxMagic},
-               4s linear infinite ${spinning};
-`
+
 
 const ButtonPlay = styled(Link)`
     position: absolute;
