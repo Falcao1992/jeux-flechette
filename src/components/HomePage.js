@@ -21,7 +21,7 @@ const HomePage = () => {
                 <h1>jeux flechette</h1>
             </BlockTitle>
             <BlockButton>
-                {/*<Circle/>*/}
+                <Circle/>
                 <ButtonPlay to="/options">Jouer</ButtonPlay>
             </BlockButton>
             <BlockBanner>
@@ -71,6 +71,27 @@ const animateButton = keyframes`
     0% {opacity: 0}100% {opacity: 1}
 `
 
+const boxMagic = keyframes`
+    from {
+        box-shadow:
+        0 0 0 #feac5e,
+        0 0 0 #c779d0,
+        0 0 0 #4bc0c8,
+        0 0 0 #42db75;
+    }
+    to {
+        box-shadow:
+        0 -5px 0 #feac5e,
+        -5px 0 0 #c779d0,
+        0 5px 0 #4bc0c8,
+        5px 0 0 #42db75;
+    }
+`
+
+const spinning = keyframes`
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+`
 
 const ContainerPage = styled.div`
     position: relative;
@@ -85,18 +106,26 @@ const BlockButton = styled.div`
     position: absolute;
     left: 50%;
     bottom: 10vh;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     opacity: 0;
     animation: 2s linear 7s forwards ${animateButton};
     transition: opacity 1s ease-in, transform 0.4s cubic-bezier(0.23,1.83,0.42,1.19);
     z-index: 1;
     
     &:hover {
-        transform: translateX(-50%) scale(1.1) ;
+        transform: translate(-50%, -50%) scale(1.1) ;
     }
 `
 
-
+const Circle = styled.div`
+    width: 8rem;
+    height: 8rem;
+    padding-top: 8.4rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: 1s linear infinite alternate ${boxMagic},
+               4s linear infinite ${spinning};
+`
 
 const ButtonPlay = styled(Link)`
     position: absolute;
