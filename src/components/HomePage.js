@@ -30,6 +30,21 @@ const HomePage = () => {
         </ContainerPage>
     )
 }
+
+const BlockTitle = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    
+    h1 {
+        text-align: center;
+        font-size: 3.5rem;
+        margin: 1.4rem;
+    }
+`
+
 const animateBlocks = (bg) => keyframes`
   0% {
     opacity: 0;
@@ -40,7 +55,7 @@ const animateBlocks = (bg) => keyframes`
     background-image: url(${bg});
     background-attachment: fixed;
     /*background-size: cover;*/
-    background-position: center center;
+    background-position: center 65%;
   }
   100% {
     opacity: 1;
@@ -48,7 +63,7 @@ const animateBlocks = (bg) => keyframes`
     background-image: url(${bg});
     background-attachment: fixed;
     /*background-size: cover;*/
-    background-position: center center;
+    background-position: center 65%;
   }
 `
 
@@ -86,19 +101,11 @@ const ContainerPage = styled.div`
     overflow: hidden;
 `
 
-const BlockTitle = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    font-size: 2.4rem;
-    color: white;
-`
 
 const BlockButton = styled.div`
     position: absolute;
     left: 50%;
-    bottom: 5vh;
+    bottom: 10vh;
     transform: translateX(-50%);
     opacity: 0;
     animation: 2s linear 7s forwards ${animateButton};
