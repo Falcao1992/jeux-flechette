@@ -154,7 +154,7 @@ const Blocks = styled.div.attrs(props => ({
         animationDelay: props.delay + 's'
     },
 }))`
-    animation: ${props => animateBlocks(props.bg,props.lastrow)};
+    animation: ${props => props.lastrow && animateBlocks(props.bg,props.lastrow)};
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
