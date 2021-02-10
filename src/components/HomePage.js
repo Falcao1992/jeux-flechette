@@ -12,7 +12,7 @@ const HomePage = () => {
     
     const generateBlock = () => {
         return [...Array(400)].map((x, i) =>
-            <Blocks key={i} bg={dartsHomePageBg} delay={i * 0.02} />)
+            <Blocks key={i} bg={dartsHomePageBg} lastrow={i < 380 && "true"} delay={i * 0.02} />)
     }
     
     return (
@@ -45,10 +45,10 @@ const BlockTitle = styled.div`
     }
 `
 
-const animateBlocks = (bg) => keyframes`
+const animateBlocks = (bg,isLastRow) => keyframes`
   0% {
     opacity: 0;
-    transform: scale(0) translateY(1000px);
+    transform: scale(0) ${!isLastRow ? 'translateY(0)' : 'translateY(1000px)'};
   }
   50% {
     opacity: 1;
@@ -154,7 +154,7 @@ const Blocks = styled.div.attrs(props => ({
         animationDelay: props.delay + 's'
     },
 }))`
-    animation: ${props => animateBlocks(props.bg)};
+    animation: ${props => animateBlocks(props.bg,props.lastrow)};
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
