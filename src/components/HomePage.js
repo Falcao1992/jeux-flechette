@@ -12,7 +12,7 @@ const HomePage = () => {
     
     const generateBlock = () => {
         return [...Array(400)].map((x, i) =>
-            <Blocks key={i} bg={dartsHomePageBg} lastrow={i < 380 && "true"} delay={i * 0.02} />)
+            <Blocks key={i} bg={dartsHomePageBg} lastrow={i < 280 && "true"} delay={i * 0.02} />)
     }
     
     return (
@@ -48,7 +48,7 @@ const BlockTitle = styled.div`
 const animateBlocks = (bg,isLastRow) => keyframes`
   0% {
     opacity: 0;
-    transform: scale(0) ${!isLastRow ? 'translateY(0)' : 'translateY(1000px)'};
+    transform: scale(0) ${!isLastRow ? 'translateY(0)' : 'translateY(30vh)'};
   }
   50% {
     opacity: 1;
