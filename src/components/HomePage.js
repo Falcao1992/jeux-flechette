@@ -20,7 +20,10 @@ const HomePage = () => {
             <BlockTitle>
                 <h1>jeux flechette</h1>
             </BlockTitle>
-            
+            <BlockButton>
+                {/*<Circle/>*/}
+                <ButtonPlay to="/options">Jouer</ButtonPlay>
+            </BlockButton>
             <BlockBanner>
                 {generateBlock()}
             </BlockBanner>
