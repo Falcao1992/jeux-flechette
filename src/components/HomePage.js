@@ -12,7 +12,7 @@ const HomePage = () => {
     
     const generateBlock = () => {
         return [...Array(400)].map((x, i) =>
-            <Blocks key={i} bg={dartsHomePageBg} lastrow={i < 280 && "true"} delay={i * 0.02} />)
+            <Blocks key={i} bg={dartsHomePageBg} delay={i * 0.02} />)
     }
     
     return (
@@ -45,10 +45,10 @@ const BlockTitle = styled.div`
     }
 `
 
-const animateBlocks = (bg,isLastRow) => keyframes`
+const animateBlocks = (bg) => keyframes`
   0% {
     opacity: 0;
-    transform: scale(0) ${!isLastRow ? 'translateY(0)' : 'translateY(30vh)'};
+    transform: scale(0) translateY(30vh);
   }
   50% {
     opacity: 1;
@@ -96,16 +96,20 @@ const spinning = keyframes`
 const ContainerPage = styled.div`
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 95vh;
     background-color: #14161a;
     overflow: hidden;
+    
+    @media only screen and (min-width: 750px ) {
+       height: 100vh;
+    }
 `
 
 
 const BlockButton = styled.div`
     position: absolute;
     left: 50%;
-    bottom: 10vh;
+    bottom: 0;
     transform: translate(-50%, -50%);
     opacity: 0;
     animation: 2s linear 7s forwards ${animateButton};
@@ -154,7 +158,7 @@ const Blocks = styled.div.attrs(props => ({
         animationDelay: props.delay + 's'
     },
 }))`
-    animation: ${props => props.lastrow && animateBlocks(props.bg,props.lastrow)};
+    animation: ${props => animateBlocks(props.bg)};
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
