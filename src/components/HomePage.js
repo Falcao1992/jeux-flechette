@@ -90,7 +90,7 @@ const spinning = keyframes`
 const ContainerPage = styled.div`
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     background-color: #070604;
     overflow: hidden;
     
