@@ -1,6 +1,6 @@
 import React, {useLayoutEffect} from "react"
 import styled, {keyframes} from "styled-components"
-import {Link} from "react-router-dom"
+/*import {Link} from "react-router-dom"*/
 import dartsHomePageBg from "../assets/dartsHomePageBg.jpg"
 
 
@@ -20,10 +20,10 @@ const HomePage = () => {
             <BlockTitle>
                 <h1>jeux flechette</h1>
             </BlockTitle>
-            <BlockButton>
+            {/*<BlockButton>
                 <Circle/>
                 <ButtonPlay to="/options">Jouer</ButtonPlay>
-            </BlockButton>
+            </BlockButton>*/}
             <BlockBanner>
                 {generateBlock()}
             </BlockBanner>
@@ -61,7 +61,7 @@ const animateBlocks = (bg) => keyframes`
   }
 `
 
-const animateButton = keyframes`
+/*const animateButton = keyframes`
     0% {opacity: 0}100% {opacity: 1}
 `
 
@@ -80,12 +80,12 @@ const boxMagic = keyframes`
         0 5px 0 #4bc0c8,
         5px 0 0 #42db75;
     }
-`
+`*/
 
-const spinning = keyframes`
+/*const spinning = keyframes`
     from {transform: rotate(0deg)}
     to {transform: rotate(360deg)}
-`
+`*/
 
 const ContainerPage = styled.div`
     position: relative;
@@ -100,7 +100,7 @@ const ContainerPage = styled.div`
 `
 
 
-const BlockButton = styled.div`
+/*const BlockButton = styled.div`
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -134,7 +134,7 @@ const ButtonPlay = styled(Link)`
     letter-spacing: 3px;
     color: aliceblue;
     cursor: pointer;
-`
+`*/
 
 const BlockBanner = styled.div`
     position: absolute;
