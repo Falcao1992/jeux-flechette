@@ -1,6 +1,6 @@
 import React, {useLayoutEffect} from "react"
 import styled, {keyframes} from "styled-components"
-/*import {Link} from "react-router-dom"*/
+import {Link} from "react-router-dom"
 import dartsHomePageBg from "../assets/dartsHomePageBg.jpg"
 
 
@@ -11,7 +11,7 @@ const HomePage = () => {
     },[])
     
     const generateBlock = () => {
-        return [...Array(400)].map((x, i) =>
+        return [...Array(300)].map((x, i) =>
             <Blocks key={i} bg={dartsHomePageBg} notlastrows={i < 280} delay={i * 0.02} />)
     }
     
@@ -20,10 +20,10 @@ const HomePage = () => {
             <BlockTitle>
                 <h1>jeux flechette</h1>
             </BlockTitle>
-            {/*<BlockButton>
+            <BlockButton>
                 <Circle/>
                 <ButtonPlay to="/options">Jouer</ButtonPlay>
-            </BlockButton>*/}
+            </BlockButton>
             <BlockBanner>
                 {generateBlock()}
             </BlockBanner>
@@ -51,7 +51,7 @@ const animateBlocks = (bg) => keyframes`
     transform: scale(0) translateY(30vh);
   }
   50% {
-    opacity: 1;
+    opacity: 0.5;
     background-image: url(${bg});
   }
   100% {
@@ -61,7 +61,7 @@ const animateBlocks = (bg) => keyframes`
   }
 `
 
-/*const animateButton = keyframes`
+const animateButton = keyframes`
     0% {opacity: 0}100% {opacity: 1}
 `
 
@@ -80,12 +80,12 @@ const boxMagic = keyframes`
         0 5px 0 #4bc0c8,
         5px 0 0 #42db75;
     }
-`*/
+`
 
-/*const spinning = keyframes`
+const spinning = keyframes`
     from {transform: rotate(0deg)}
     to {transform: rotate(360deg)}
-`*/
+`
 
 const ContainerPage = styled.div`
     position: relative;
@@ -94,13 +94,10 @@ const ContainerPage = styled.div`
     background-color: #070604;
     overflow: hidden;
     
-   /* @media only screen and (min-width: 750px ) {
-       height: 100vh;
-    }*/
 `
 
 
-/*const BlockButton = styled.div`
+const BlockButton = styled.div`
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -134,14 +131,14 @@ const ButtonPlay = styled(Link)`
     letter-spacing: 3px;
     color: aliceblue;
     cursor: pointer;
-`*/
+`
 
 const BlockBanner = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
+    width: 100vw;
+    height: 85vh;
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
@@ -157,8 +154,8 @@ const Blocks = styled.div.attrs(props => ({
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     position: relative;
-    width: 5vw;
-    height: 5vh;
+    width: 6.66vw;
+    height: 4.25vh;
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
