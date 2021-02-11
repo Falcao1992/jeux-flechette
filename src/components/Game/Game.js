@@ -34,7 +34,7 @@ const Game = () => {
                 <Square animdelay={5} />
                 <Container>
                     {<h2>{players[currentPlayer] && 'Au tour de ' + players[currentPlayer].name}</h2>}
-                    <ContainerPlayerCard display={players.length > 0 && "true"}>
+                    <ContainerPlayerCard display={players.length > 0 ? "true" : undefined}>
                         {players &&  players.map((player, index) => {
                             return (
                                 <PlayerCard key={index}
