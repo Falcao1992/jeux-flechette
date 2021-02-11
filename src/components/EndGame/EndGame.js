@@ -9,8 +9,8 @@ const EndGame = ({rank}) => {
             <h2>Résultats de la partie</h2>
             {rank && rank.map((playerRanked, index) => {
                 return (
-                    <BlockPlayerRank rank={playerRanked.order + 1} key={index}>
-                        <small>{playerRanked.order + 1}</small>
+                    <BlockPlayerRank rank={index + 1} key={index}>
+                        <small>{index + 1}</small>
                         <img src={playerRanked.avatar} alt="" />
                         <div>
                             <p>{playerRanked.name}</p>
@@ -36,7 +36,7 @@ const BlockPlayerRank = styled.div`
     height: ${props => props.rank === 1 ? "12vh" : props.rank === 2 ? "10vh" : props.rank === 3 ? "8vh" : "6vh"};
     margin: 1.4rem auto;
     border-radius: 10px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.3);
     backdrop-filter: blur(5px);
     box-shadow: 0 25px 45px rgba(0,0,0,0.1);
     border: 1px solid rgba(255,255,255,0.5);

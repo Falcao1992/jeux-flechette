@@ -48,7 +48,7 @@ const Game = () => {
                             )
                         })}
                     </ContainerPlayerCard>
-                    <EndGame rank={rank} />
+                    {rank.length > 0 && <EndGame rank={rank} />}
                 </Container>
             </Box>
         </ContainerPage>
@@ -194,7 +194,7 @@ const Container = styled.div`
 
 const ContainerPlayerCard = styled.div`
     display: ${props => props.display ? "block" : "none"};
-    margin: 1.4rem .7rem;
+    margin: 1.4rem 0;
 `
 
 export default Game

@@ -3,6 +3,7 @@
 html {
   box-sizing: border-box;
   overflow: hidden;
+  background-color: #070604;
 }
 *, *:before, *:after {
   box-sizing: inherit;

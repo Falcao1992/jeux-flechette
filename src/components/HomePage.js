@@ -53,17 +53,11 @@ const animateBlocks = (bg) => keyframes`
   50% {
     opacity: 1;
     background-image: url(${bg});
-    background-attachment: fixed;
-    /*background-size: cover;*/
-    background-position: center 65%;
   }
   100% {
     opacity: 1;
     transform: scale(1) translateY(0px);
     background-image: url(${bg});
-    background-attachment: fixed;
-    /*background-size: cover;*/
-    background-position: center 65%;
   }
 `
 
@@ -96,7 +90,7 @@ const spinning = keyframes`
 const ContainerPage = styled.div`
     position: relative;
     width: 100%;
-    height: 95vh;
+    height: 92vh;
     background-color: #14161a;
     overflow: hidden;
     
@@ -166,6 +160,13 @@ const Blocks = styled.div.attrs(props => ({
     display: block;
     width: 5vw;
     height: 5vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    
+    @media only screen and (min-width: 750px ) {
+       background-size: contain;
+    }
     
     &:nth-child(even){
         animation-duration: 1s;
