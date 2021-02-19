@@ -4,6 +4,8 @@ html {
   box-sizing: border-box;
   overflow: hidden;
   background-color: #070604;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 *, *:before, *:after {
   box-sizing: inherit;

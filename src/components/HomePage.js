@@ -11,8 +11,8 @@ const HomePage = () => {
     },[])
     
     const generateBlock = () => {
-        return [...Array(300)].map((x, i) =>
-            <Blocks key={i} bg={dartsHomePageBg} notlastrows={i < 280} delay={i * 0.02} />)
+        return [...Array(400)].map((x, i) =>
+            <Blocks key={i} bg={dartsHomePageBg} delay={i * 0.02} />)
     }
     
     return (
@@ -90,7 +90,7 @@ const spinning = keyframes`
 const ContainerPage = styled.div`
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     background-color: #070604;
     overflow: hidden;
     
@@ -138,7 +138,7 @@ const BlockBanner = styled.div`
     top: 0;
     left: 0;
     width: 100vw;
-    height: 85vh;
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
